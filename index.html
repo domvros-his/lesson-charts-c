@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Από την Ιστορική Γνώση στην Ιστορική Πράξη</title>
+<style>
+:root{
+  --bg:#2b46b8;
+  --surface:#fff8f1;
+  --surface-soft:#e8ecff;
+  --ink:#25233b;
+  --muted:#6f6674;
+  --line:#d8cfda;
+  --accent:#365bd6;
+  --accent-soft:#e5eaff;
+  --warm:#861f45;
+  --danger:#a52b4f;
+  --gold:#f0bd4a;
+  --burgundy:#861f45;
+  --burgundy-soft:#f7e3ea;
+  --royal-dark:#2948b9;
+  --shadow:0 16px 38px rgba(28,26,72,.18);
+  --radius:16px;
+  --max:1280px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--ink);
+  background:
+    radial-gradient(circle at 10% 8%, rgba(240,189,74,.28) 0 7%, transparent 24%),
+    radial-gradient(circle at 88% 16%, rgba(183,64,101,.40) 0 10%, transparent 32%),
+    radial-gradient(circle at 70% 88%, rgba(54,91,214,.34) 0 10%, transparent 32%),
+    linear-gradient(135deg,#2445c2 0%,#4a3c99 46%,#7e2148 100%);
+  background-attachment:fixed;
+  font-family:"Segoe UI",Arial,sans-serif;line-height:1.55;
+}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+[hidden]{display:none!important}
+
+/* Header */
+.app-header{
+  position:sticky;top:0;z-index:40;
+  background:linear-gradient(90deg,rgba(38,68,190,.96),rgba(84,48,132,.96) 54%,rgba(126,33,72,.96));
+  color:#fff;border-bottom:1px solid rgba(255,255,255,.20);backdrop-filter:blur(12px);
+  box-shadow:0 8px 24px rgba(25,22,67,.18);
+}
+.header-row{
+  max-width:var(--max);margin:0 auto;padding:11px 22px;display:flex;
+  align-items:center;gap:14px;min-height:68px;
+}
+.brand{min-width:0;display:flex;align-items:center;gap:11px;margin-right:auto}
+.brand-mark{width:34px;height:34px;border-radius:10px;background:var(--gold);display:grid;place-items:center;color:#4a2b46;font-weight:850;box-shadow:inset 0 -3px 0 rgba(89,48,24,.12)}
+.brand-text{min-width:0}
+.brand-title{font-weight:760;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand-sub{font-size:12px;color:rgba(255,255,255,.78);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.main-nav{display:flex;align-items:center;gap:3px}
+.nav-btn,.plain-btn,.unit-nav-btn,.icon-btn{
+  border:0;background:transparent;border-radius:10px;padding:9px 11px;
+  font-weight:650;font-size:13px;
+}
+.nav-btn:hover,.icon-btn:hover{background:rgba(255,255,255,.14)}
+.plain-btn:hover,.unit-nav-btn:hover{background:var(--surface-soft)}
+.nav-btn.active{background:#fff8f1;color:var(--royal-dark);box-shadow:0 3px 10px rgba(20,25,75,.14)}
+.mobile-menu{display:none}
+
+/* Main */
+main{max-width:var(--max);margin:0 auto;padding:34px 22px 76px}
+.view{animation:fade .16s ease}
+@keyframes fade{from{opacity:.55;transform:translateY(3px)}to{opacity:1;transform:none}}
+.kicker{font-size:12px;text-transform:uppercase;letter-spacing:.11em;color:#ffd46e;font-weight:850;margin:0 0 8px;text-shadow:0 1px 0 rgba(0,0,0,.08)}
+h1,h2,h3{line-height:1.18;margin-top:0}
+h1{font-size:clamp(30px,4vw,50px);letter-spacing:-.035em;margin-bottom:12px}
+h2{font-size:clamp(24px,3vw,34px);letter-spacing:-.02em}
+h3{font-size:18px}
+p{margin:0 0 12px}
+.source-copy{max-width:930px;font-size:17px}
+.source-flow{margin-top:22px;padding:16px 18px;border-left:4px solid var(--gold);background:rgba(255,248,241,.96);color:var(--ink);border-radius:0 12px 12px 0;font-weight:650;box-shadow:0 8px 24px rgba(34,28,76,.12)}
+
+/* Home */
+.home-hero{padding:30px 0 26px;border-bottom:1px solid rgba(255,255,255,.22)}
+.home-hero>h1,.home-hero>.source-copy{color:#fff}
+.home-hero>.source-copy{color:rgba(255,255,255,.90)}
+.home-meta{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 0}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;background:var(--accent-soft);color:var(--royal-dark);font-size:12px;font-weight:700}
+.home-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:28px}
+.home-card{background:rgba(255,248,241,.97);border:1px solid rgba(255,255,255,.44);border-radius:14px;padding:18px;text-align:left;min-height:112px;transition:.15s ease;box-shadow:0 9px 24px rgba(32,28,74,.10)}
+.home-card:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:#aebbf0}
+.home-card strong{display:block;font-size:17px;margin-bottom:5px}
+.home-card span{font-size:13px;color:#6c6070}
+
+/* Page heading */
+.page-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:22px;color:#fff}
+.page-head p:not(.kicker){color:rgba(255,255,255,.88)}
+.page-head .plain-btn{background:rgba(255,248,241,.96);color:var(--ink);border:1px solid rgba(255,255,255,.38)}
+.page-head h1{margin-bottom:0}
+.page-head-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+/* Roadmap */
+.filter-bar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px}
+.filter-bar select{border:1px solid rgba(255,255,255,.42);background:rgba(255,248,241,.97);border-radius:10px;padding:10px 12px;min-width:230px;box-shadow:0 5px 15px rgba(33,29,74,.08);font-weight:650}
+.filter-bar select:first-child{border-color:rgba(54,91,214,.55);box-shadow:inset 0 0 0 1px rgba(54,91,214,.08),0 5px 15px rgba(33,29,74,.08)}
+.filter-bar select:last-child{border-color:rgba(134,31,69,.50);box-shadow:inset 0 0 0 1px rgba(134,31,69,.07),0 5px 15px rgba(33,29,74,.08)}
+.table-wrap{overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+table{width:100%;border-collapse:collapse}
+th,td{padding:12px 13px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:13px}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:#5e5368;background:#eee8f7;position:sticky;top:0}
+tr:last-child td{border-bottom:0}
+tbody tr[data-unit]{cursor:pointer}
+tbody tr[data-unit]:hover{background:#ecefff}
+
+/* Roadmap — category colour system */
+.roadmap-table-wrap{border-color:rgba(255,255,255,.42);box-shadow:0 16px 34px rgba(30,25,72,.16)}
+.roadmap-table{min-width:1080px}
+.roadmap-table th,.roadmap-table td{font-size:14.5px;line-height:1.5;padding:14px 15px;border-bottom-color:rgba(80,64,99,.13)}
+.roadmap-table th{font-size:12.5px;font-weight:850;letter-spacing:.055em;color:#fff;border-right:1px solid rgba(255,255,255,.18);text-shadow:0 1px 0 rgba(0,0,0,.10)}
+.roadmap-table th:nth-child(1){background:#365bd6}
+.roadmap-table th:nth-child(2){background:#861f45}
+.roadmap-table th:nth-child(3){background:#f0bd4a;color:#3f2e0a;text-shadow:none}
+.roadmap-table th:nth-child(4){background:#147d79}
+.roadmap-table th:nth-child(5){background:#6949b8}
+.roadmap-table th:nth-child(6){background:#c94f62}
+.roadmap-table td{font-weight:560;color:#29243a}
+.roadmap-table td:nth-child(1){background:#e8edff;text-align:center;color:#2948b9;font-weight:850;font-size:16px}
+.roadmap-table td:nth-child(2){background:#f8e8ee;font-weight:740;color:#64203b}
+.roadmap-table td:nth-child(3){background:#fff3ce;text-align:center;font-weight:800;color:#6d4b04}
+.roadmap-table td:nth-child(4){background:#e5f5f2;color:#225e5b}
+.roadmap-table td:nth-child(5){background:#eee9fb;color:#523a8b;font-weight:680}
+.roadmap-table td:nth-child(6){background:#fbe9ed;color:#8d3345;font-weight:680}
+.roadmap-table tbody tr[data-unit]:hover td{filter:saturate(1.12) brightness(.985)}
+.roadmap-table tbody tr[data-unit]:hover td:first-child{box-shadow:inset 4px 0 0 #365bd6}
+.roadmap-table th:nth-child(1),.roadmap-table td:nth-child(1){width:68px}
+.roadmap-table th:nth-child(3),.roadmap-table td:nth-child(3){width:78px}
+
+/* Unit index */
+.unit-index{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.unit-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:15px 16px;display:flex;gap:14px;align-items:flex-start;text-align:left;transition:.15s ease}
+.unit-card:hover{border-color:#b8c3f2;box-shadow:0 8px 18px rgba(45,61,129,.08)}
+.unit-num{flex:0 0 42px;width:42px;height:42px;border-radius:12px;background:var(--accent);color:white;display:grid;place-items:center;font-weight:800;box-shadow:inset 0 -3px 0 rgba(0,0,0,.08)}
+.unit-card:nth-child(4n+2) .unit-num,.unit-card:nth-child(4n+4) .unit-num{background:var(--burgundy)}
+.unit-card strong{display:block;line-height:1.28;margin-bottom:4px}
+.unit-card small{color:var(--muted)}
+
+/* Unit view */
+.unit-toolbar{display:grid;grid-template-columns:auto minmax(240px,1fr) auto;gap:8px;align-items:center;margin-bottom:18px;padding:8px;border-radius:14px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16)}
+.unit-nav-btn{background:rgba(255,248,241,.97);border:1px solid rgba(255,255,255,.44);padding:10px 13px}
+.unit-select{width:100%;border:1px solid rgba(255,255,255,.44);background:rgba(255,248,241,.97);border-radius:10px;padding:10px 12px;font-weight:650}
+.unit-title-wrap{margin-bottom:18px;color:#fff}
+.unit-title-wrap h1{font-size:clamp(27px,3.6vw,42px);margin-bottom:9px}
+.unit-badges{display:flex;gap:7px;flex-wrap:wrap}
+.unit-badge{background:rgba(233,238,255,.96);border:1px solid rgba(255,255,255,.42);border-radius:999px;padding:6px 9px;font-size:12px;font-weight:700;color:var(--royal-dark);box-shadow:0 3px 10px rgba(29,28,76,.08)}
+.unit-badge:nth-child(2){background:rgba(249,226,235,.97);border-color:rgba(255,255,255,.42);color:var(--burgundy)}
+
+.map-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);margin-bottom:18px}
+.map-head{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,#dfe6ff 0%,#fff5ed 52%,#f5dce5 100%)}
+.map-head strong{font-size:13px;color:var(--royal-dark)}
+.map-actions{display:flex;gap:4px}
+.map-stage{background:#e6e1ec;display:grid;place-items:center;min-height:280px;position:relative}
+.map-stage img{display:block;width:100%;height:auto;max-height:72vh;object-fit:contain;background:white}
+.map-missing{padding:48px 20px;text-align:center;color:var(--muted);font-size:14px}
+.map-footer{padding:5px 12px;background:linear-gradient(90deg,rgba(43,69,184,.08),rgba(134,31,69,.08));border-top:1px solid #dfd4dc;text-align:center;color:#74666d;font-size:10.5px;line-height:1.35}
+.map-stage:fullscreen{background:#111;padding:0;display:grid;grid-template-rows:1fr auto}
+.map-stage:fullscreen img{width:100vw;height:calc(100vh - 30px);max-height:none;object-fit:contain}
+.map-stage:fullscreen + .map-footer{display:none}
+.fullscreen-wrap:fullscreen{background:#111;display:grid;grid-template-rows:1fr auto;width:100vw;height:100vh}
+.fullscreen-wrap:fullscreen .map-stage{min-height:0;background:#111}
+.fullscreen-wrap:fullscreen .map-stage img{width:100vw;height:calc(100vh - 30px);max-height:none;object-fit:contain}
+.fullscreen-wrap:fullscreen .map-footer{background:rgba(20,20,20,.92);border-color:#333;color:#c9cecc;padding:7px 14px}
+
+.content-layout{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:18px;align-items:start}
+.accordion-stack{display:grid;gap:9px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:13px;overflow:hidden}
+summary{list-style:none;cursor:pointer;padding:14px 16px;font-weight:750;display:flex;align-items:center;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:20px;color:var(--muted);font-weight:400}
+details[open] summary::after{content:"−"}
+details[open] summary{border-bottom:1px solid var(--line)}
+.detail-body{padding:15px 16px 17px}
+.field{margin-bottom:15px}
+.field:last-child{margin-bottom:0}
+.field-label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800;margin-bottom:4px}
+.field-value{font-size:15px}
+.scaffold-list{display:grid;gap:7px}
+.scaffold{padding:10px 12px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:10px}
+
+.side-actions{display:grid;gap:9px;position:sticky;top:88px}
+.side-button{width:100%;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 13px;text-align:left;font-weight:700}
+.side-button:hover{background:var(--accent-soft);border-color:#b8c3f2}
+.side-button span{display:block;font-size:11px;font-weight:500;color:var(--muted);margin-top:3px}
+
+/* Color accents — structure and navigation unchanged */
+.home-card:nth-child(4n+1){border-top:3px solid var(--accent)}
+.home-card:nth-child(4n+2){border-top:3px solid var(--burgundy)}
+.home-card:nth-child(4n+3){border-top:3px solid var(--gold)}
+.home-card:nth-child(4n+4){border-top:3px solid var(--accent)}
+summary{border-left:3px solid transparent}
+details[open] summary{border-left-color:var(--accent);color:var(--royal-dark);background:#edf1ff}
+.accordion-stack details:nth-child(even)[open] summary{border-left-color:var(--burgundy);color:var(--burgundy)}
+.side-button:first-child{border-left:3px solid var(--accent)}
+.side-button:nth-child(2){border-left:3px solid var(--burgundy)}
+.filter-bar select:focus,.unit-select:focus{outline:3px solid var(--accent-soft);border-color:var(--accent)}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid rgba(65,105,225,.24);outline-offset:2px}
+
+/* Tools */
+.tool-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.tool-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:left}
+.tool-card:hover{border-color:#b8c3f2;box-shadow:0 8px 18px rgba(45,61,129,.08)}
+.tool-card small{display:block;color:var(--muted);margin-bottom:6px}
+.tool-sheet{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;overflow:auto}
+.tool-sheet [contenteditable="true"]{min-height:54px;outline:none;background:#fffdf9}
+.tool-sheet [contenteditable="true"]:focus{box-shadow:inset 0 0 0 2px var(--accent)}
+.prompt-row{margin:14px 0}
+.prompt-row label{display:block;font-weight:750;margin-bottom:6px}
+.prompt-row div{min-height:86px;border:1px solid var(--line);border-radius:10px;padding:10px;background:#fffdf9}
+
+/* Notes drawer */
+.drawer-backdrop{position:fixed;inset:0;background:rgba(24,31,67,.30);z-index:60;opacity:0;pointer-events:none;transition:.18s ease}
+.drawer-backdrop.open{opacity:1;pointer-events:auto}
+.notes-drawer{position:fixed;top:0;right:0;height:100vh;width:min(480px,94vw);background:var(--surface);z-index:70;box-shadow:-20px 0 50px rgba(35,42,92,.20);transform:translateX(102%);transition:.2s ease;display:grid;grid-template-rows:auto 1fr auto}
+.notes-drawer.open{transform:none}
+.drawer-head{padding:17px 18px;border-bottom:1px solid var(--line);display:flex;align-items:start;gap:12px}
+.drawer-head h2{font-size:20px;margin:0 0 3px}
+.drawer-head p{font-size:12px;color:var(--muted);margin:0}
+.close-btn{margin-left:auto;border:0;background:var(--accent-soft);color:var(--royal-dark);width:36px;height:36px;border-radius:10px;font-size:18px}
+.drawer-body{padding:16px 18px;overflow:auto}
+.notes-area{width:100%;height:100%;min-height:360px;resize:none;border:1px solid var(--line);border-radius:12px;padding:13px;outline:none;line-height:1.6;background:#fffaf6}
+.notes-area:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.drawer-foot{border-top:1px solid var(--line);padding:12px 18px;display:flex;gap:8px;justify-content:flex-end;background:#f3edf5}
+.action-btn{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 12px;font-weight:700}
+.action-btn.primary{background:var(--accent);border-color:var(--accent);color:white;box-shadow:0 4px 12px rgba(65,105,225,.20)}
+.action-btn.danger{color:var(--burgundy)}
+
+/* Search dialog */
+.dialog-backdrop{position:fixed;inset:0;background:rgba(24,31,67,.32);z-index:80;display:grid;place-items:start center;padding:9vh 18px 18px}
+.search-dialog{width:min(760px,100%);background:var(--surface);border-radius:16px;box-shadow:0 24px 70px rgba(32,39,83,.28);overflow:hidden}
+.search-row{display:flex;gap:8px;padding:13px;border-bottom:1px solid var(--line)}
+.search-input{flex:1;border:0;outline:none;font-size:17px;padding:8px}
+.search-results{max-height:58vh;overflow:auto;padding:8px}
+.search-result{display:block;width:100%;border:0;background:transparent;text-align:left;border-radius:10px;padding:11px 12px}
+.search-result:hover{background:var(--accent-soft)}
+.search-result strong{display:block;margin-bottom:3px}
+.search-result small{color:var(--muted)}
+.empty{padding:28px;text-align:center;color:var(--muted)}
+
+/* Notes-only print */
+.notes-print-sheet{display:none}
+@media print{
+  body:not(.printing-notes){display:none!important}
+  body.printing-notes > *{display:none!important}
+  body.printing-notes .notes-print-sheet{display:block!important;color:#111;background:white;padding:18mm;font-family:Georgia,"Times New Roman",serif}
+  .notes-print-sheet h1{font-size:20pt;margin:0 0 4mm}
+  .notes-print-sheet h2{font-size:13pt;margin:0 0 8mm;font-weight:normal}
+  .notes-print-sheet .print-notes-text{white-space:pre-wrap;font-size:11.5pt;line-height:1.6}
+}
+
+.mobile-menu{background:#fff8f1;color:var(--ink);border:0;border-radius:9px;padding:8px}
+@media(max-width:900px){
+  .main-nav{display:none}.mobile-menu{display:block}
+  .home-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .content-layout{grid-template-columns:1fr}.side-actions{position:static;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .unit-index,.tool-list{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  .header-row{padding:10px 13px}.brand-sub{display:none}
+  main{padding:22px 13px 58px}
+  .home-actions{grid-template-columns:1fr}
+  .unit-toolbar{grid-template-columns:44px minmax(0,1fr) 44px}
+  .unit-nav-btn{font-size:0;padding:10px}.unit-nav-btn.prev::before{content:"←";font-size:18px}.unit-nav-btn.next::before{content:"→";font-size:18px}
+  .side-actions{grid-template-columns:1fr}
+  .page-head{align-items:start;flex-direction:column}
+  th,td{padding:10px;font-size:12px}
+}
+</style>
+</head>
+<body>
+<header class="app-header">
+  <div class="header-row">
+    <a class="brand" href="#home" aria-label="Αρχική">
+      <div class="brand-mark">Ι</div>
+      <div class="brand-text">
+        <div class="brand-title">Από την Ιστορική Γνώση στην Ιστορική Πράξη</div>
+        <div class="brand-sub">Κάρτες εφαρμογής ανά ενότητα</div>
+      </div>
+    </a>
+    <nav class="main-nav" aria-label="Κύρια πλοήγηση">
+      <button class="nav-btn" data-route="roadmap">Οδικός χάρτης</button>
+      <button class="nav-btn" data-route="units">Ενότητες</button>
+      <button class="nav-btn" data-route="tools">Εκτυπώσιμα πρότυπα</button>
+      <button class="nav-btn" data-route="rubric">Αποτίμηση</button>
+      <button class="nav-btn" data-route="principle">Τελική αρχή</button>
+    </nav>
+    <button class="icon-btn" id="searchBtn" type="button" aria-label="Αναζήτηση">⌕ <span class="desktop-label">Αναζήτηση</span></button>
+    <select class="mobile-menu" id="mobileMenu" aria-label="Κύρια πλοήγηση">
+      <option value="home">Αρχική</option>
+      <option value="roadmap">Οδικός χάρτης</option>
+      <option value="units">Ενότητες</option>
+      <option value="tools">Εκτυπώσιμα πρότυπα</option>
+      <option value="rubric">Αποτίμηση</option>
+      <option value="principle">Τελική αρχή</option>
+    </select>
+  </div>
+</header>
+<main id="view"></main>
+
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+<aside class="notes-drawer" id="notesDrawer" aria-hidden="true">
+  <div class="drawer-head">
+    <div>
+      <h2>Προσωπικές σημειώσεις</h2>
+      <p id="notesUnitLabel"></p>
+    </div>
+    <button class="close-btn" id="closeNotes" type="button" aria-label="Κλείσιμο">×</button>
+  </div>
+  <div class="drawer-body"><textarea class="notes-area" id="notesArea" placeholder="Γράψτε εδώ…"></textarea></div>
+  <div class="drawer-foot">
+    <button class="action-btn danger" id="clearNotes" type="button">Καθαρισμός</button>
+    <button class="action-btn primary" id="printNotes" type="button">Εκτύπωση σημειώσεων</button>
+  </div>
+</aside>
+
+<div class="dialog-backdrop" id="searchDialog" hidden>
+  <div class="search-dialog" role="dialog" aria-modal="true" aria-label="Αναζήτηση">
+    <div class="search-row"><input class="search-input" id="searchInput" type="search" placeholder="Αναζήτηση στις ενότητες…"><button class="close-btn" id="closeSearch" type="button" aria-label="Κλείσιμο">×</button></div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
+<section class="notes-print-sheet" id="notesPrintSheet">
+  <h1 id="printUnitTitle"></h1>
+  <h2>Προσωπικές σημειώσεις</h2>
+  <div class="print-notes-text" id="printNotesText"></div>
+</section>
+
+<script>
+const DATA = {"units":[{"id":1,"title":"Η εποχή του Διαφωτισμού","periods":2,"node":"Οι πολιτικές ιδέες του Λοκ, του Ρουσό και του Μοντεσκιέ.","reasoning":"Ορίζω και συνδέω έννοιες","tool":"Τρεις έννοιες – μία σχέση","question":"Πώς μπορούσαν η λογική και τα δικαιώματα να περιορίσουν την αυθαίρετη εξουσία;","concepts":"ορθός λόγος – φυσικά δικαιώματα – κοινωνικό συμβόλαιο – διάκριση εξουσιών – ανεξιθρησκία","evidence":"Πηγές Λοκ, Ρουσό, Μοντεσκιέ ή Βολτέρου.","period1":"Ο συνολικός Χάρτης παρουσιάζεται σύντομα. Η τάξη εστιάζει στον πολιτικό κλάδο και συνδέει στοχαστή – έννοια – πρόβλημα εξουσίας.","period2":"Ολοκληρώνονται θρησκεία, εκπαίδευση, οικονομία, Εγκυκλοπαίδεια, διάδοση και φωτισμένη δεσποτεία. Ο πολιτικός κόμβος επανασυνδέεται με το συνολικό κίνημα.","application":"","scaffolds":["Ο όρος … σημαίνει …","Η ιδέα … περιόριζε την αυθαιρεσία, επειδή …"],"return_map":"Τι κοινό είχαν οι αλλαγές που πρότεινε ο Διαφωτισμός σε διαφορετικούς τομείς;","exit_ticket":"Σύνδεσε «φυσικά δικαιώματα», «λαϊκή κυριαρχία» και «διάκριση εξουσιών» και εξήγησε ποια γενικότερη επιδίωξη εκφράζουν.","image":"1.png"},{"id":2,"title":"Η αμερικανική επανάσταση","periods":1,"node":"Η μετατροπή της φορολογικής και πολιτικής διαμαρτυρίας σε αγώνα ανεξαρτησίας.","reasoning":"Εξηγώ αιτιακές σχέσεις","tool":"Επειδή – γι’ αυτό – με αποτέλεσμα","question":"Πώς η φορολογία χωρίς εκπροσώπηση οδήγησε από τη διαμαρτυρία στην ανεξαρτησία;","concepts":"αποικία – πολιτική εκπροσώπηση – φορολογία – ανεξαρτησία – ομοσπονδία","evidence":"Η Διακήρυξη της Ανεξαρτησίας και η εικόνα της «γιορτής του τσαγιού».","period1":"","period2":"","application":"Οι μαθητές/τριες οργανώνουν σε αιτιακή αλυσίδα: νέοι φόροι → μποϊκοτάζ → περιορισμοί → Κογκρέσο → ένοπλη ρήξη → Διακήρυξη.","scaffolds":["Επειδή η Αγγλία …, οι άποικοι …","Αυτό οδήγησε σε …"],"return_map":"Σε ποιο σημείο η διαμαρτυρία παύει να είναι μόνο διαμαρτυρία και γίνεται πολιτική ρήξη;","exit_ticket":"Η επανάσταση έγινε πολιτική ρήξη όταν …","image":"2.png"},{"id":3,"title":"Η έκρηξη και η εξέλιξη της γαλλικής επανάστασης (1789–1794)","periods":2,"node":"Η γελοιογραφία των τριών κοινωνικών τάξεων.","reasoning":"Διακρίνω οπτική παρατήρηση, συμπέρασμα και όρια","tool":"Βλέπω – συμπεραίνω – δεν μπορώ να γνωρίζω","question":"Τι μας επιτρέπει η γελοιογραφία να καταλάβουμε για την κοινωνική ανισότητα πριν από την Επανάσταση;","concepts":"προνόμιο – τρίτη τάξη – κοινωνική ανισότητα – Εθνική Συνέλευση – λαϊκή κυριαρχία","evidence":"Η γελοιογραφία των τριών τάξεων και η Διακήρυξη των Δικαιωμάτων.","period1":"Οι μαθητές/τριες χρησιμοποιούν το οπτικό σχήμα: τι βλέπω – τι συμπεραίνω – ποιο ορατό στοιχείο στηρίζει το συμπέρασμα – τι δεν μπορώ να γνωρίζω.","period2":"Η κοινωνική ανισότητα επανατοποθετείται στον συνολικό Χάρτη μαζί με την οικονομική και πολιτική κρίση και την εξέλιξη προς τη ριζοσπαστικοποίηση.","application":"","scaffolds":["Στην εικόνα βλέπω …","Από τη λεπτομέρεια … μπορώ να συμπεράνω …"],"return_map":"Γιατί η γελοιογραφία βοηθά να καταλάβουμε την Επανάσταση αλλά δεν αρκεί για να την εξηγήσει;","exit_ticket":"Μία αιτία δεν αρκεί για να εξηγήσει τη Γαλλική Επανάσταση, επειδή …","image":"3.png"},{"id":4,"title":"Η τελευταία φάση της γαλλικής επανάστασης και η εποχή του Ναπολέοντα","periods":1,"node":"Η διπλή σχέση του Ναπολέοντα με την Επανάσταση.","reasoning":"Διακρίνω αλλαγή και συνέχεια","tool":"Τι άλλαξε – τι παρέμεινε","question":"Πώς ο Ναπολέων περιόρισε την Επανάσταση και ταυτόχρονα διέδωσε ορισμένες ιδέες της;","concepts":"Διευθυντήριο – πραξικόπημα – ναπολεόντειος κώδικας – αυτοκρατορία – εθνική αντίδραση","evidence":"Χάρτης της ναπολεόντειας Ευρώπης ή πηγή για τον Ναπολεόντειο Κώδικα.","period1":"","period2":"","application":"Τα μέτρα ταξινομούνται σε: συνέχεια επαναστατικών αρχών / περιορισμό επαναστατικών αρχών.","scaffolds":["Από τη μία …, από την άλλη …","Παρέμεινε …, αλλά άλλαξε …"],"return_map":"Ποια επαναστατική αρχή παρέμεινε και ποιο στοιχείο της πολιτικής εξουσίας άλλαξε σε σχέση με την Επανάσταση;","exit_ticket":"Ο Ναπολέων ήταν ταυτόχρονα κληρονόμος και περιοριστής της Επανάστασης, επειδή …","image":"4.png"},{"id":5,"title":"Ο ελληνισμός από τα μέσα του 18ου έως τις αρχές του 19ου αιώνα","periods":1,"node":"Η σύνδεση οικονομικών, κοινωνικών και πνευματικών μεταβολών με την εθνική αφύπνιση.","reasoning":"Εξηγώ πώς συνδέονται διαφορετικοί μετασχηματισμοί","tool":"Επειδή – γι’ αυτό – με αποτέλεσμα","question":"Πώς οι οικονομικές, κοινωνικές και πνευματικές αλλαγές προετοίμασαν την εθνική αφύπνιση;","concepts":"παροικία – αστική τάξη – Νεοελληνικός Διαφωτισμός – εκπαίδευση – εθνική συνείδηση","evidence":"Πηγή Ρήγα ή Κοραή και στοιχεία για εμπόριο, ναυτιλία και σχολεία.","period1":"","period2":"","application":"Οι μαθητές/τριες συνδέουν εμπόριο/ναυτιλία, παροικίες, σχολεία/βιβλία και διαφωτιστικές ιδέες με τις συνέπειές τους.","scaffolds":["Επειδή αναπτύχθηκε …, δημιουργήθηκαν …","Αυτό συνέβαλε σε …"],"return_map":"Πώς συνδέεται η οικονομική άνοδος με τη μόρφωση και τη διάδοση νέων ιδεών;","exit_ticket":"Ο σημαντικότερος σύνδεσμος ανάμεσα στην οικονομική άνοδο και την εθνική αφύπνιση ήταν …","image":"5.png"},{"id":6,"title":"Πολιτικές και εθνικές διεκδικήσεις στην Ευρώπη μετά το 1815","periods":1,"node":"Δύο αντιλήψεις για το έθνος: κοινή βούληση/σκοπός και γλώσσα/ιστορικοί δεσμοί.","reasoning":"Συγκρίνω ιστορικές θέσεις","tool":"Α και Β","question":"Γιατί οι αποφάσεις του Συνεδρίου της Βιέννης δεν μπόρεσαν να σταματήσουν τις πολιτικές και εθνικές διεκδικήσεις;","concepts":"φιλελευθερισμός – ριζοσπαστισμός – σοσιαλισμός – έθνος – αρχή των εθνοτήτων","evidence":"Οι δύο πηγές για το έθνος, Ματσίνι και Φίχτε.","period1":"","period2":"","application":"Οι μαθητές/τριες συγκρίνουν τις δύο αντιλήψεις με κοινά κριτήρια.","scaffolds":["Οι δύο απόψεις συμφωνούν ότι …","Ωστόσο διαφέρουν ως προς …"],"return_map":"Πώς οι διαφορετικές αντιλήψεις για το έθνος συνδέονται με την αμφισβήτηση της ευρωπαϊκής τάξης του 1815;","exit_ticket":"Η αρχή των εθνοτήτων αμφισβητούσε τον χάρτη του 1815, επειδή …","image":"6.png"},{"id":7,"title":"Η Φιλική Εταιρεία και η κήρυξη της Επανάστασης στις παραδουνάβιες ηγεμονίες","periods":1,"node":"Γιατί επιλέχθηκαν οι Ηγεμονίες και γιατί το σχέδιο απέτυχε εκεί.","reasoning":"Εξηγώ επιλογές και αποτελέσματα","tool":"Επειδή – γι’ αυτό – με αποτέλεσμα","question":"Πώς μια μυστική οργάνωση επιχείρησε να μετατρέψει την εθνική ιδέα σε επαναστατική δράση;","concepts":"Φιλική Εταιρεία – μύηση – παραδουνάβιες ηγεμονίες – Ιερός Λόχος – ρωσική βοήθεια","evidence":"Προκήρυξη του Υψηλάντη ή χάρτης των Ηγεμονιών.","period1":"","period2":"","application":"Η κάρτα οργανώνεται σε μία διδακτική περίοδο.","scaffolds":["Επειδή οι Φιλικοί προσδοκούσαν …, γι’ αυτό …","Το σχέδιο απέτυχε επειδή …"],"return_map":"Πώς οι αρχικές επιλογές του σχεδίου συνδέθηκαν τελικά με τους λόγους της αποτυχίας του στις Ηγεμονίες;","exit_ticket":"Η αποτυχία στις Ηγεμονίες δεν σήμαινε αποτυχία της Επανάστασης συνολικά, επειδή …","image":"7.png"},{"id":8,"title":"Η εξέλιξη της ελληνικής επανάστασης (1821–1827)","periods":2,"node":"Πώς η Επανάσταση πέρασε από την αρχική επιτυχία στον κίνδυνο κατάρρευσης και στη διάσωση.","reasoning":"Εξηγώ αιτιακές αλληλουχίες","tool":"Επειδή – γι’ αυτό – με αποτέλεσμα","question":"Γιατί η Επανάσταση άντεξε, κινδύνευσε να καταρρεύσει και τελικά διασώθηκε;","concepts":"εσωτερικές συγκρούσεις – Ιμπραήμ – Μεσολόγγι – διεθνής παρέμβαση – Ναβαρίνο","evidence":"Χάρτης επιχειρήσεων, εικόνα της Εξόδου ή πηγή για το Ναβαρίνο.","period1":"Οργανώνονται οι βασικές μεταβάσεις και οι αιτιακές σχέσεις ανάμεσα στις τρεις κύριες φάσεις.","period2":"Ολοκληρώνεται η συνολική εξέλιξη και η μεταβολή της διεθνούς στάσης επανασυνδέεται με την κρίση του Αγώνα.","application":"","scaffolds":["Η κατάσταση επιδεινώθηκε επειδή …","Γι’ αυτό …, με αποτέλεσμα …"],"return_map":"Πώς συνδέονται η εσωτερική κρίση, η αιγυπτιακή επέμβαση και η μεταβολή της διεθνούς στάσης;","exit_ticket":"Η πιο κρίσιμη μεταβολή στην πορεία της Επανάστασης ήταν …, επειδή …","image":"8.png"},{"id":9,"title":"Πρώτες προσπάθειες των επαναστατημένων Ελλήνων για συγκρότηση κράτους","periods":2,"node":"Η δημιουργία κεντρικών θεσμών ως λύση πραγματικών αναγκών αλλά και ως πηγή νέων συγκρούσεων.","reasoning":"Συνδέω ανάγκες, θεσμούς, αποτελέσματα και αντιδράσεις","tool":"Πρόβλημα – μέτρο – αποτέλεσμα – αντίδραση","question":"Γιατί η Επανάσταση χρειαζόταν κράτος και γιατί η προσπάθεια συγκρότησής του οδήγησε σε συγκρούσεις;","concepts":"τοπικοί οργανισμοί – Εθνοσυνέλευση – σύνταγμα – κεντρική διοίκηση – εμφύλιος πόλεμος","evidence":"Συντάγματα Επιδαύρου και Τροιζήνας ή πηγή για τον εμφύλιο.","period1":"Οι μαθητές/τριες συνδέουν συγκεκριμένες ανάγκες με θεσμικές απαντήσεις και τα άμεσα αποτελέσματά τους.","period2":"Οι θεσμοί επανατοποθετούνται στον Χάρτη και εξετάζονται οι τοπικισμοί, η κατανομή εξουσίας, τα δάνεια και οι προσωπικές φιλοδοξίες ως παράγοντες έντασης.","application":"","scaffolds":["Το βασικό πρόβλημα ήταν …","Για να αντιμετωπιστεί δημιουργήθηκε …","Ωστόσο, προκάλεσε …"],"return_map":"Πώς η ανάγκη πολιτικής οργάνωσης οδήγησε ταυτόχρονα στη δημιουργία θεσμών και σε νέες συγκρούσεις;","exit_ticket":"Η συγκρότηση κράτους βοήθησε τον Αγώνα, αλλά ταυτόχρονα …","image":"9.png"},{"id":10,"title":"Ελληνική επανάσταση και Ευρώπη","periods":2,"node":"Κυβερνήσεις και φιλελληνικό κίνημα.","reasoning":"Συγκρίνω διαφορετικές στάσεις και κίνητρα","tool":"Α και Β","question":"Γιατί οι ευρωπαϊκές κυβερνήσεις ήταν αρχικά εχθρικές, ενώ οι ευρωπαϊκές κοινωνίες συχνά φιλελληνικές;","concepts":"Παλινόρθωση – φιλελευθερισμός – φιλελληνισμός – διεθνής στάση – αυτονομία/ανεξαρτησία","evidence":"Προκήρυξη προς την Ευρώπη, Σέλεϊ, χάρτης του πρώτου κράτους.","period1":"Σύγκριση κυβερνητικών και κοινωνικών στάσεων με κοινά κριτήρια.","period2":"Επανασύνδεση με το Ανατολικό Ζήτημα, τη μεταβολή της στάσης των Δυνάμεων και την πορεία προς την ανεξαρτησία.","application":"","scaffolds":["Αρχικά οι Δυνάμεις …, επειδή …","Αντίθετα, οι φιλέλληνες …"],"return_map":"Πώς η διαφορά ανάμεσα στις κυβερνήσεις και τις ευρωπαϊκές κοινωνίες συνδέθηκε τελικά με τη μεταβολή της διεθνούς στάσης;","exit_ticket":"Η ευρωπαϊκή παρέμβαση δεν οφειλόταν σε έναν μόνο λόγο, αλλά …","image":"10.png"},{"id":17,"title":"Ο Ι. Καποδίστριας ως κυβερνήτης της Ελλάδας","periods":2,"node":"Η σχέση ανάμεσα στην ανάγκη ανασυγκρότησης και στο πολιτικό κόστος της συγκέντρωσης εξουσίας.","reasoning":"Αξιολογώ πολιτικές αποφάσεις","tool":"Πρόβλημα – μέτρο – αποτέλεσμα – αντίδραση","question":"Ήταν η συγκέντρωση εξουσίας αναγκαίο μέσο ανασυγκρότησης ή αυταρχική επιλογή;","concepts":"ανασυγκρότηση – διοίκηση – συγκέντρωση εξουσίας – αναστολή συντάγματος – αντιπολίτευση","evidence":"Αντίθετες πηγές Κωλέττη και Εϋνάρδου, χάρτης του 1832.","period1":"Προβλήματα – μέτρα – αποτελέσματα – αντιδράσεις.","period2":"Ολοκλήρωση διοίκησης, οικονομίας, στρατού και εκπαίδευσης και ισορροπημένη συνολική αποτίμηση.","application":"","scaffolds":["Για να αντιμετωπίσει …, ο Καποδίστριας …","Το μέτρο συνέβαλε σε …, αλλά προκάλεσε …"],"return_map":"Ποια προβλήματα απαιτούσαν γρήγορη κρατική παρέμβαση και ποια μέτρα δημιούργησαν το μεγαλύτερο πολιτικό κόστος;","exit_ticket":"Μία ισορροπημένη αποτίμηση πρέπει να αναγνωρίζει ότι …, αλλά και ότι …","image":"17.png"},{"id":18,"title":"Από την άφιξη του Όθωνα έως την 3η Σεπτεμβρίου 1843","periods":2,"node":"Οι διαφορετικές οπτικές Μάουρερ, Ρούντχαρτ και Μακρυγιάννη.","reasoning":"Διακρίνω πληροφορία, συμπέρασμα και όρια","tool":"Η πηγή λέει – εγώ συμπεραίνω","question":"Γιατί η οικοδόμηση ενός σύγχρονου κράτους προκάλεσε τόσο έντονη αντίδραση;","concepts":"Αντιβασιλεία – απόλυτη μοναρχία – συγκεντρωτισμός – βαυαροκρατία – Σύνταγμα","evidence":"Οι πηγές Μάουρερ, Ρούντχαρτ και Μακρυγιάννη και η εικόνα της 3ης Σεπτεμβρίου.","period1":"Κάθε ομάδα ελέγχει ποιος μιλά και σε ποιο πλαίσιο, διακρίνει τι λέει η πηγή, τι μπορεί να συμπεράνει και τι δεν μπορεί να γνωρίζει μόνο από αυτή.","period2":"Οι διαφορετικές οπτικές διασταυρώνονται και επανασυνδέονται με την Αντιβασιλεία, την απόλυτη μοναρχία και την πορεία προς το αίτημα Συντάγματος.","application":"","scaffolds":["Η πηγή αναφέρει …","Από αυτό μπορώ να συμπεράνω …","Δεν μπορώ όμως να γνωρίζω …"],"return_map":"Πώς μπορούν οι τρεις διαφορετικές οπτικές να μας βοηθήσουν να καταλάβουμε γιατί η ίδια διαδικασία μπορούσε να θεωρείται ταυτόχρονα «οργάνωση» και «αυθαιρεσία»;","exit_ticket":"Μία πληροφορία της πηγής + ένα τεκμηριωμένο συμπέρασμα + ένα όριο.","image":"18.png"},{"id":19,"title":"Από την 3η Σεπτεμβρίου 1843 έως την έξωση του Όθωνα","periods":1,"node":"Η θεσμική αλλαγή του 1844 και οι πολιτικές συνέχειες.","reasoning":"Διακρίνω αλλαγή και συνέχεια","tool":"Τι άλλαξε – τι παρέμεινε","question":"Γιατί η παραχώρηση Συντάγματος δεν εξάλειψε τα προβλήματα του πολιτεύματος;","concepts":"Σύνταγμα 1844 – Βουλή – βασιλικές εξουσίες – Μεγάλη Ιδέα – αλυτρωτισμός","evidence":"Οι δύο αντίθετες πηγές για τη Μεγάλη Ιδέα.","period1":"","period2":"","application":"Διακρίνω αλλαγή και συνέχεια.","scaffolds":["Το Σύνταγμα άλλαξε …","Ωστόσο, παρέμεινε …"],"return_map":"Πώς συνδέονται οι περιορισμένες πολιτικές αλλαγές με τη μεταγενέστερη δυσαρέσκεια;","exit_ticket":"Η έξωση του Όθωνα εξηγείται από …","image":"19.png"},{"id":20,"title":"Από την έξωση του Όθωνα έως το κίνημα στο Γουδί","periods":2,"node":"Τρικούπης και Δηλιγιάννης.","reasoning":"Συγκρίνω πολιτικές","tool":"Α και Β","question":"Πώς η κοινοβουλευτική εξέλιξη συνδέθηκε με τον εκσυγχρονισμό, την οικονομική κρίση και την πολιτική δυσαρέσκεια;","concepts":"δεδηλωμένη – δικομματισμός – εκσυγχρονισμός – πτώχευση – Διεθνής Οικονομικός Έλεγχος","evidence":"«Τις πταίει;», διώρυγα της Κορίνθου, πηγή για το 1897.","period1":"Σύγκριση Τρικούπη – Δηλιγιάννη ως προς στόχο, μέσα, κοινωνικό κόστος και διοίκηση.","period2":"Η σύγκριση επανατοποθετείται στον συνολικό Χάρτη: δεδηλωμένη – δικομματισμός – οικονομική κρίση – 1897 – ΔΟΕ – δυσαρέσκεια.","application":"","scaffolds":["Ο Τρικούπης επιδίωκε …, ενώ ο Δηλιγιάννης …","Και οι δύο …, αλλά διέφεραν ως προς …"],"return_map":"Γιατί η κοινοβουλευτική εξέλιξη και η ύπαρξη δύο ισχυρών κομμάτων δεν ήταν αρκετές για να αποτρέψουν την οικονομική και πολιτική κρίση;","exit_ticket":"Η αρχή της δεδηλωμένης βελτίωσε …, αλλά δεν έλυσε …","image":"20.png"},{"id":22,"title":"Τα Βαλκάνια των αλληλοσυγκρουόμενων εθνικών επιδιώξεων","periods":2,"node":"Ο χάρτης των εδαφικών μεταβολών και των επικαλυπτόμενων διεκδικήσεων.","reasoning":"Αναλύω χάρτη ως ιστορικό τεκμήριο","tool":"Βλέπω – συμπεραίνω – δεν μπορώ να γνωρίζω","question":"Γιατί οι εθνικές διεκδικήσεις στα Βαλκάνια οδηγούσαν τόσο συχνά σε σύγκρουση;","concepts":"εθνικές επιδιώξεις – αυτονομία – επικαλυπτόμενες διεκδικήσεις – Μακεδονικό ζήτημα – Νεότουρκοι","evidence":"Χάρτης 1877–1881 και πηγές για την εκπαιδευτική και οικονομική διάσταση.","period1":"Οι μαθητές/τριες καταγράφουν τι βλέπουν στον χάρτη, τι μπορούν να συμπεράνουν για τις επικαλυπτόμενες διεκδικήσεις και τι δεν μπορεί να δείξει ο χάρτης μόνος του.","period2":"Στον Χάρτη προστίθενται τα μη στρατιωτικά μέσα επιρροής και το Μακεδονικό ζήτημα.","application":"","scaffolds":["Στον χάρτη βλέπω …","Από αυτό μπορώ να συμπεράνω …","Ο χάρτης δεν μπορεί να μου δείξει …"],"return_map":"Τι μας εξηγεί ο χάρτης για τις συγκρούσεις και τι χρειάζεται να προστεθεί από τις υπόλοιπες πτυχές της ενότητας;","exit_ticket":"Το Μακεδονικό ζήτημα ήταν σύνθετο, επειδή …","image":"22.png"},{"id":27,"title":"Το κίνημα στο Γουδί (1909)","periods":1,"node":"Γιατί ένα στρατιωτικό κίνημα ξεπέρασε τα στενά στρατιωτικά αιτήματα.","reasoning":"Εξηγώ αιτιακές σχέσεις","tool":"Επειδή – γι’ αυτό – με αποτέλεσμα","question":"Γιατί ένα στρατιωτικό κίνημα απέκτησε ευρεία κοινωνική υποστήριξη;","concepts":"Στρατιωτικός Σύνδεσμος – Ανόρθωση – ήττα 1897 – πελατειακές πρακτικές – κοινωνική υποστήριξη","evidence":"Αιτήματα του Συνδέσμου και λαϊκή λιθογραφία/συλλαλητήριο.","period1":"","period2":"","application":"Η κάρτα οργανώνεται σε μία διδακτική περίοδο.","scaffolds":["Επειδή υπήρχε δυσαρέσκεια για …","Γι’ αυτό το αίτημα της Ανόρθωσης …"],"return_map":"Πώς συνδέονται οι διαφορετικές μορφές δυσαρέσκειας με τη διεύρυνση των αιτημάτων του κινήματος;","exit_ticket":"Η κοινωνία δεν υποστήριξε μόνο στρατιωτικά αιτήματα, αλλά …","image":"27.png"},{"id":28,"title":"Η βενιζελική πολιτική της περιόδου 1910–1912","periods":1,"node":"Η σύνδεση συγκεκριμένων μεταρρυθμίσεων με συγκεκριμένες κρατικές ανάγκες.","reasoning":"Συνδέω πρόβλημα και πολιτικό μέτρο","tool":"Πρόβλημα – μέτρο – αποτέλεσμα – αντίδραση","question":"Πώς ο Βενιζέλος συνέδεσε τις μεταρρυθμίσεις με την προετοιμασία για εθνικές εξελίξεις;","concepts":"αναθεωρητική Βουλή – Σύνταγμα 1911 – απαλλοτριώσεις – μονιμότητα υπαλλήλων – αναδιοργάνωση στρατού","evidence":"Πρώτη ομιλία Βενιζέλου και ρυθμίσεις του Συντάγματος του 1911.","period1":"","period2":"","application":"Για κάθε μεταρρύθμιση οι μαθητές/τριες εντοπίζουν πρόβλημα – μέτρο – επιδιωκόμενο αποτέλεσμα. Όπου το υλικό δεν δίνει σαφή αντίδραση, η τελευταία στήλη του σχήματος δεν συμπληρώνεται τεχνητά.","scaffolds":["Το πρόβλημα ήταν …","Το μέτρο … επιδίωκε να …"],"return_map":"Πώς συνδέονται οι επιμέρους μεταρρυθμίσεις με τον ευρύτερο στόχο ενίσχυσης του κράτους;","exit_ticket":"Ο συμβιβασμός με τη μοναρχία ήταν στρατηγική επιλογή, επειδή …","image":"28.png"},{"id":29,"title":"Οι Βαλκανικοί Πόλεμοι (1912–1913)","periods":2,"node":"Γιατί οι σύμμαχοι του Α΄ Πολέμου έγιναν αντίπαλοι στον Β΄.","reasoning":"Συγκρίνω δύο διαδοχικές πολεμικές καταστάσεις","tool":"Α και Β","question":"Πώς προσωρινοί σύμμαχοι με διαφορετικές επιδιώξεις νίκησαν από κοινού και αμέσως μετά συγκρούστηκαν μεταξύ τους;","concepts":"Βαλκανική Συμμαχία – Α΄ Βαλκανικός Πόλεμος – Β΄ Βαλκανικός Πόλεμος – Συνθήκη Λονδίνου – Συνθήκη Βουκουρεστίου","evidence":"Διάγγελμα Γεωργίου, χάρτες και πηγή για τον ρόλο Βενιζέλου.","period1":"Σύγκριση Α΄ και Β΄ Βαλκανικού ως προς αντιπάλους, στόχους, αιτίες και αποτελέσματα.","period2":"Χαρτογραφική ολοκλήρωση: Θεσσαλονίκη, Ήπειρος, νησιά και Μακεδονία και οι συνθήκες που έκλεισαν κάθε φάση.","application":"","scaffolds":["Στον Α΄ Πόλεμο …, ενώ στον Β΄ …","Το κοινό στοιχείο ήταν …, αλλά διέφερε …"],"return_map":"Ποια διαφορά ανάμεσα στους στόχους των συμμάχων εξηγεί τη μετάβαση από τη συνεργασία στη σύγκρουση;","exit_ticket":"Οι πρώην σύμμαχοι συγκρούστηκαν επειδή …","image":"29.png"},{"id":30,"title":"Η Ελλάδα και τα Βαλκάνια μετά τους Βαλκανικούς Πολέμους","periods":1,"node":"Τι άλλαξε με την εδαφική επέκταση και ποιες νέες ανάγκες παρέμειναν ή δημιουργήθηκαν.","reasoning":"Διακρίνω αλλαγή και συνέχεια","tool":"Τι άλλαξε – τι παρέμεινε","question":"Γιατί ο σχεδόν διπλασιασμός της Ελλάδας δημιούργησε ταυτόχρονα ευκαιρίες και νέες δυσκολίες;","concepts":"εδαφική επέκταση – Νέες Χώρες – διοικητική οργάνωση – πληθυσμιακή ποικιλία – οικονομικά κέντρα","evidence":"Χάρτης του 1913 και πηγή Ρακτιβάν.","period1":"","period2":"","application":"Η κάρτα οργανώνεται σε μία διδακτική περίοδο.","scaffolds":["Μετά τους πολέμους άλλαξε …","Ωστόσο, παρέμεινε / δημιουργήθηκε η ανάγκη …"],"return_map":"Ποια μεταβολή ήταν άμεση και ποιες ανάγκες συνέχισαν να απαιτούν πολιτική αντιμετώπιση;","exit_ticket":"Η μεγαλύτερη πρόκληση των Νέων Χωρών ήταν …","image":"30.png"},{"id":31,"title":"Τα αίτια, η έκρηξη και τα μέτωπα του Α΄ Παγκόσμιου Πολέμου","periods":2,"node":"Γιατί η δολοφονία ήταν αφορμή και όχι επαρκής αιτία.","reasoning":"Διακρίνω βαθύτερα αίτια, αφορμή, κλιμάκωση και καμπή","tool":"Βαθύτερο αίτιο – αφορμή – κλιμάκωση – καμπή","question":"Πώς ένας περιφερειακός φόνος μετατράπηκε σε παγκόσμιο πόλεμο;","concepts":"ιμπεριαλισμός – εθνικισμός – μιλιταρισμός – συμμαχίες – Σαράγεβο Προτεινόμενα τεκμήρια: Γελοιογραφίες αιτίων και χάρτης συμμαχιών/μετώπων.","evidence":"Γελοιογραφίες αιτίων και χάρτης συμμαχιών/μετώπων.","period1":"Διάκριση βαθύτερων αιτίων – αφορμής – κλιμάκωσης – πιθανής κρίσιμης καμπής.","period2":"Ολοκλήρωση του Χάρτη με τις συμμαχίες και τα μέτωπα και ερμηνεία της μεταβολής κλίμακας του πολέμου.","application":"","scaffolds":["Ένα βαθύτερο αίτιο ήταν …","Η δολοφονία αποτέλεσε αφορμή …","Η κρίση κλιμακώθηκε όταν …","Μία πιθανή κρίσιμη καμπή ήταν …"],"return_map":"Ποιο στοιχείο του προϋπάρχοντος ευρωπαϊκού συστήματος βοήθησε περισσότερο μια τοπική κρίση να μετατραπεί σε γενικευμένο πόλεμο;","exit_ticket":"Ο πόλεμος έγινε παγκόσμιος επειδή …","image":"31.png"},{"id":32,"title":"Η Ελλάδα στον Α΄ Παγκόσμιο Πόλεμο – Ο Εθνικός Διχασμός","periods":2,"node":"Οι στρατηγικές Βενιζέλου και Κωνσταντίνου.","reasoning":"Συγκρίνω στρατηγικές και συνέπειες","tool":"Α και Β","question":"Γιατί η διαφωνία για την εξωτερική πολιτική εξελίχθηκε σε βαθύ πολιτικό και κοινωνικό διχασμό;","concepts":"Αντάντ – ουδετερότητα – Εθνική Άμυνα – δύο κέντρα εξουσίας – Εθνικός Διχασμός Προτεινόμενα τεκμήρια: Οι αντίθετες θέσεις Βενιζέλου και Κωνσταντίνου και σχετικός χάρτης.","evidence":"","period1":"Σύγκριση ως προς εκτίμηση έκβασης, επιθυμητή στάση, θεσμικό επιχείρημα και υποστηρικτές.","period2":"Οι συνέπειες των δύο στρατηγικών τοποθετούνται στον Χάρτη: πολιτική σύγκρουση, Εθνική Άμυνα, δύο κέντρα εξουσίας, κοινωνικός διχασμός.","application":"","scaffolds":["Ο Βενιζέλος υποστήριζε …, ενώ ο Κωνσταντίνος …","Η βασική διαφορά τους ήταν …"],"return_map":"Πώς η διαφορά δύο στρατηγικών μετατράπηκε από διαφωνία εξωτερικής πολιτικής σε εσωτερική πολιτική και κοινωνική σύγκρουση;","exit_ticket":"Ο Εθνικός Διχασμός ήταν θεσμική και κοινωνική κρίση, επειδή …","image":"32.png"},{"id":34,"title":"Η λήξη του Α΄ Παγκόσμιου Πολέμου και οι μεταπολεμικές ρυθμίσεις","periods":2,"node":"Διακηρυγμένες αρχές και πραγματική εφαρμογή.","reasoning":"Συγκρίνω αρχές και εφαρμογή","tool":"Α και Β","question":"Γιατί η ειρήνη του 1919 δεν δημιούργησε σταθερή και δίκαιη τάξη;","concepts":"14 Σημεία – αυτοδιάθεση – Συνθήκη Βερσαλιών – Κοινωνία των Εθνών – αναθεωρητισμός","evidence":"Τα 14 Σημεία του Ουίλσον και χάρτης μεταπολεμικής Ευρώπης.","period1":"Σύγκριση αρχών Ουίλσον και αποφάσεων των συνθηκών με κοινά κριτήρια.","period2":"Ολοκλήρωση του Χάρτη με νέα κράτη, ΚτΕ, κυρώσεις, μειονότητες και αναθεωρητισμό.","application":"","scaffolds":["Η αρχή υποστήριζε …, ενώ η εφαρμογή …","Υπήρχε συμφωνία ως προς …, αλλά αντίφαση ως προς …"],"return_map":"Πώς οι αποκλίσεις ανάμεσα στις διακηρυγμένες αρχές και στις πραγματικές ρυθμίσεις συνδέθηκαν με τον μεταγενέστερο αναθεωρητισμό;","exit_ticket":"Η μεταπολεμική ειρήνη περιείχε σπέρματα νέας σύγκρουσης, επειδή …","image":"34.png"},{"id":38,"title":"Ο Μικρασιατικός Πόλεμος (1919–1922)","periods":2,"node":"Πώς διαδοχικές αποφάσεις και μεταβολές άλλαξαν την πορεία της εκστρατείας.","reasoning":"Εξηγώ αιτιακές αλληλουχίες και μεταβολές πορείας","tool":"Επειδή – γι’ αυτό – με αποτέλεσμα","question":"Πώς η ελληνική παρουσία στη Σμύρνη μετατράπηκε σε εκστρατεία, στρατιωτικό αδιέξοδο και καταστροφή;","concepts":"Σμύρνη – Συνθήκη Σεβρών – κεμαλικό κίνημα – Σαγγάριος – κατάρρευση μετώπου","evidence":"Χάρτης επιχειρήσεων και πηγές για την ελληνική διοίκηση/καταστροφή.","period1":"Οι μαθητές/τριες συνδέουν τις διαδοχικές αποφάσεις και εξελίξεις σε αιτιακή αλυσίδα.","period2":"Η αλυσίδα επανασυνδέεται με τη συνολική γεωγραφική εξέλιξη και τον χάρτη των επιχειρήσεων.","application":"","scaffolds":["Επειδή …, η εκστρατεία …","Αυτό οδήγησε σε …","Με αποτέλεσμα …"],"return_map":"Πώς συνδέονται η πολιτική μεταβολή, η μεταβολή της διεθνούς στήριξης και η επέκταση της εκστρατείας με το τελικό αδιέξοδο;","exit_ticket":"Η κατάρρευση δεν οφειλόταν μόνο σε ένα γεγονός, αλλά …","image":"38.png"},{"id":39,"title":"Εξελίξεις σε Ελλάδα και Τουρκία μετά τον Μικρασιατικό Πόλεμο","periods":1,"node":"Οι διαφορετικές πολιτικές μεταβολές στις δύο χώρες.","reasoning":"Συγκρίνω δύο πολιτικές εξελίξεις","tool":"Α και Β","question":"Πώς η στρατιωτική ήττα αναδιαμόρφωσε τα πολιτικά καθεστώτα Ελλάδας και Τουρκίας;","concepts":"κίνημα 1922 – Δίκη των Έξι – κατάργηση σουλτανάτου – τουρκική δημοκρατία – Συνθήκη Λοζάνης","evidence":"Πηγές για το κίνημα/τη δίκη και χάρτης Λοζάνης.","period1":"","period2":"","application":"Σύγκριση Ελλάδας – Τουρκίας ως προς πολιτικές αλλαγές και σχέση με τη διεθνή ρύθμιση.","scaffolds":["Στην Ελλάδα …, ενώ στην Τουρκία …","Και στις δύο περιπτώσεις …"],"return_map":"Πώς οι διαφορετικές πολιτικές μεταβολές των δύο χωρών συνδέονται με τη νέα διεθνή ρύθμιση της Λοζάνης;","exit_ticket":"Η Λοζάνη έκλεισε ένα μέτωπο, αλλά δημιούργησε …","image":"39.png"},{"id":44,"title":"Το προσφυγικό ζήτημα στην Ελλάδα κατά τον Μεσοπόλεμο","periods":2,"node":"Η αντιμετώπιση των άμεσων προβλημάτων και τα αποτελέσματα της αποκατάστασης.","reasoning":"Αξιολογώ πολιτικές αντιμετώπισης προβλημάτων","tool":"Πρόβλημα – μέτρο – αποτέλεσμα – αντίδραση","question":"Πώς η εγκατάσταση των προσφύγων αποτέλεσε ταυτόχρονα ανθρωπιστική κρίση και βαθύ κοινωνικό μετασχηματισμό;","concepts":"πρόσφυγες – ΕΑΠ – αγροτική αποκατάσταση – αστική αποκατάσταση – κοινωνικές εντάσεις","evidence":"Πηγές και φωτογραφίες προσφυγικών συνοικισμών και στοιχεία αποκατάστασης.","period1":"Προβλήματα – μέτρα – άμεσα αποτελέσματα – δυσκολίες/αντιδράσεις.","period2":"Αγροτική και αστική αποκατάσταση και επανασύνδεση με τις μακροπρόθεσμες οικονομικές, κοινωνικές και πολιτισμικές συνέπειες.","application":"","scaffolds":["Το κύριο πρόβλημα ήταν …","Για να αντιμετωπιστεί …","Το μέτρο συνέβαλε σε …","Ωστόσο …"],"return_map":"Πώς συνδέονται τα άμεσα μέτρα αποκατάστασης με τις μακροπρόθεσμες οικονομικές, κοινωνικές και πολιτισμικές μεταβολές;","exit_ticket":"Η αποκατάσταση δεν ήταν μόνο ζήτημα στέγασης, αλλά …","image":"44.png"}],"tools":[{"id":1,"title":"Τρεις έννοιες – μία σχέση","kind":"table","headers":["Έννοια","Με απλά λόγια","Σύνδεση με τις άλλες έννοιες"],"rows":4},{"id":2,"title":"Επειδή – γι’ αυτό – με αποτέλεσμα","kind":"prompts","prompts":["Επειδή:","Γι’ αυτό:","Με αποτέλεσμα:"]},{"id":3,"title":"Πρόβλημα – μέτρο – αποτέλεσμα – αντίδραση","kind":"table","headers":["Πρόβλημα","Μέτρο","Αποτέλεσμα","Αντίδραση / κόστος"],"rows":4},{"id":4,"title":"Η πηγή λέει – εγώ συμπεραίνω","kind":"table","headers":["Η πηγή λέει / δείχνει","Με απλά λόγια","Εγώ συμπεραίνω","Δεν μπορώ να γνωρίζω"],"rows":4},{"id":5,"title":"Α και Β","kind":"table","headers":["Κριτήριο","Α","Β","Συμπέρασμα"],"rows":4},{"id":6,"title":"Τι άλλαξε – τι παρέμεινε","kind":"table","headers":["Πριν","Τι άλλαξε","Τι παρέμεινε"],"rows":4},{"id":7,"title":"Βαθύτερο αίτιο – αφορμή – κλιμάκωση – καμπή","kind":"table","headers":["Βαθύτερα αίτια","Αφορμή","Κλιμάκωση","Πιθανή καμπή"],"rows":4},{"id":8,"title":"Βλέπω – συμπεραίνω – δεν μπορώ να γνωρίζω","kind":"table","headers":["Βλέπω","Συμπεραίνω","Ποιο ορατό στοιχείο με στηρίζει;","Δεν μπορώ να γνωρίζω"],"rows":4}],"rubric":[["Κριτήριο","2 — Κατακτήθηκε","1 — Μερικώς","0 — Δεν εμφανίζεται"],["Ιστορική ακρίβεια","Οι έννοιες και τα γεγονότα είναι ακριβή","Υπάρχει μικρή ασάφεια","Υπάρχουν σοβαρές συγχύσεις"],["Τεκμηρίωση","Χρησιμοποιείται συγκεκριμένο τεκμήριο","Γίνεται γενική αναφορά","Δεν χρησιμοποιείται τεκμήριο"],["Συλλογισμός","Εξηγείται καθαρά η σχέση τεκμηρίου και συμπεράσματος","Η σχέση υπονοείται","Υπάρχει απλή απαρίθμηση"],["Ιστορική γλώσσα","Χρησιμοποιούνται κατάλληλοι όροι και σύνδεσμοι","Περιορισμένη χρήση","Οι όροι απουσιάζουν ή είναι λανθασμένοι"]],"author":"Παναγιώτης Δόμβρος · Εκπαιδευτικός-Θεατρολόγος · Επιμορφωτής ΤΠΕ · Διευθυντής 1ου Γυμνασίου Πυλαίας"};
+const INTRO = {
+  title:"Από την Ιστορική Γνώση στην Ιστορική Πράξη",
+  subtitle:"Η ιστορική σκέψη ως γραμματισμός πεδίου",
+  guide:"Πρακτικός οδηγός εφαρμογής στη διδακτέα ύλη της Ιστορίας Γ΄ Γυμνασίου",
+  cards:"Κάρτες εφαρμογής ανά ενότητα",
+  intro:"Κάθε κάρτα δίνει ένα σύντομο σχέδιο εργασίας. Δεν υποκαθιστά τη συνολική διδασκαλία: ο Χάρτης δείχνει το σύνολο και ο Κόμβος πού θα γίνει η βαθύτερη ιστορική επεξεργασία.",
+  flow:"Χάρτης / συνολική εικόνα → Ερώτημα εστίασης → Ιστορικός συλλογισμός → Εργαλείο / στήριξη → Μαθητικό προϊόν → Επιστροφή",
+  toolsIntro:"Τα οκτώ διδακτικά σχήματα σε επεξεργάσιμη μορφή, για χρήση σε διαφορετικές ενότητες και βαθμούς υποστήριξης.",
+  rubricSubtitle:"Κλίμακα 2–1–0: κατακτήθηκε · μερικώς · δεν εμφανίζεται",
+  principleLead:"Το ζητούμενο δεν είναι κάθε ενότητα να μετατρέπεται σε σύνθετο διδακτικό σενά.",
+  principleSteps:["Βλέπουν πρώτα το σύνολο","Εστιάζουν σε ιστορικό πρόβλημα","Εκτελούν ιστορικό συλλογισμό","Οργανώνουν τον λόγο τους","Επιστρέφουν στη συνολική εικόνα"],
+  principleEnd:"Ο/η εκπαιδευτικός αλλάζει το ιστορικό περιεχόμενο. Τα εργαλεία παραμένουν οικεία, ενώ η εξωτερική στήριξη μειώνεται καθώς αυξάνεται η αυτονομία."
+};
+const view=document.getElementById('view');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+const unitById=id=>DATA.units.find(u=>u.id===Number(id));
+const sourcePeriods=n=>`${n} ${n===1?'διδακτική περίοδος':'διδακτικές περίοδοι'}`;
+function setHash(h){location.hash=h}
+function navActive(route){
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.route===route));
+  const mm=document.getElementById('mobileMenu');
+  mm.value=['roadmap','units','tools','rubric','principle','home'].includes(route)?route:'units';
+}
+function renderHome(){
+  navActive('home');
+  view.innerHTML=`<section class="view home-hero">
+    <p class="kicker">${esc(INTRO.cards)}</p>
+    <h1>${esc(INTRO.title)}</h1>
+    <div class="source-copy"><p><strong>${esc(INTRO.subtitle)}</strong></p><p>${esc(INTRO.guide)}</p><p>${esc(INTRO.intro)}</p></div>
+    <div class="source-flow">${esc(INTRO.flow)}</div>
+    <div class="home-actions">
+      <button class="home-card" onclick="setHash('roadmap')"><strong>Οδικός χάρτης</strong><span>Ενότητα · περίοδοι · κόμβος · ιστορικός συλλογισμός · εργαλείο</span></button>
+      <button class="home-card" onclick="setHash('units')"><strong>Κάρτες εφαρμογής</strong><span>Κάρτες εφαρμογής ανά ενότητα</span></button>
+      <button class="home-card" onclick="setHash('tools')"><strong>Εκτυπώσιμα πρότυπα</strong><span>Γενικά εκτυπώσιμα πρότυπα</span></button>
+      <button class="home-card" onclick="setHash('rubric')"><strong>Αποτίμηση</strong><span>Σύντομη ρουμπρίκα ιστορικού λόγου</span></button>
+    </div>
+  </section>`;
+}
+function renderRoadmap(){
+  navActive('roadmap');
+  const tools=[...new Set(DATA.units.map(u=>u.tool))].sort((a,b)=>a.localeCompare(b,'el'));
+  const reasons=[...new Set(DATA.units.map(u=>u.reasoning))].sort((a,b)=>a.localeCompare(b,'el'));
+  view.innerHTML=`<section class="view">
+    <div class="page-head"><div><p class="kicker">ΟΔΙΚΟΣ ΧΑΡΤΗΣ</p><h1>Οδικός χάρτης της ύλης</h1><p>Ενότητα · περίοδοι · κόμβος · ιστορικός συλλογισμός · εργαλείο</p></div></div>
+    <div class="filter-bar"><select id="toolFilter"><option value="">Όλα τα εργαλεία</option>${tools.map(x=>`<option>${esc(x)}</option>`).join('')}</select><select id="reasonFilter"><option value="">Όλοι οι συλλογισμοί</option>${reasons.map(x=>`<option>${esc(x)}</option>`).join('')}</select></div>
+    <div class="table-wrap roadmap-table-wrap"><table class="roadmap-table"><thead><tr><th>Εν.</th><th>Τίτλος</th><th>Περ.</th><th>Κόμβος εστίασης</th><th>Ιστορικός συλλογισμός</th><th>Εργαλείο</th></tr></thead><tbody id="roadRows"></tbody></table></div>
+  </section>`;
+  const tf=document.getElementById('toolFilter'), rf=document.getElementById('reasonFilter'), tbody=document.getElementById('roadRows');
+  const draw=()=>{const rows=DATA.units.filter(u=>(!tf.value||u.tool===tf.value)&&(!rf.value||u.reasoning===rf.value));tbody.innerHTML=rows.map(u=>`<tr data-unit="${u.id}"><td><strong>${u.id}</strong></td><td>${esc(u.title)}</td><td>${u.periods}</td><td>${esc(u.node)}</td><td>${esc(u.reasoning)}</td><td>${esc(u.tool)}</td></tr>`).join('');tbody.querySelectorAll('tr[data-unit]').forEach(r=>r.onclick=()=>setHash('unit-'+r.dataset.unit));};
+  tf.onchange=rf.onchange=draw; draw();
+}
+function renderUnits(){
+  navActive('units');
+  view.innerHTML=`<section class="view"><div class="page-head"><div><p class="kicker">ΚΑΡΤΕΣ ΕΦΑΡΜΟΓΗΣ</p><h1>Κάρτες εφαρμογής ανά ενότητα</h1><p>${esc(INTRO.intro)}</p></div></div><div class="unit-index">${DATA.units.map(u=>`<button class="unit-card" onclick="setHash('unit-${u.id}')"><span class="unit-num">${String(u.id).padStart(2,'0')}</span><span><strong>${esc(u.title)}</strong><small>${esc(u.reasoning)} · ${esc(u.tool)} · ${esc(sourcePeriods(u.periods))}</small></span></button>`).join('')}</div></section>`;
+}
+function unitSelectOptions(current){return DATA.units.map(u=>`<option value="${u.id}" ${u.id===current?'selected':''}>Ενότητα ${u.id} — ${esc(u.title)}</option>`).join('')}
+function detailField(label,value){if(!value)return'';return `<div class="field"><div class="field-label">${esc(label)}</div><div class="field-value">${esc(value)}</div></div>`}
+function renderUnit(id){
+  navActive('units'); const u=unitById(id); if(!u){renderUnits();return}
+  const idx=DATA.units.findIndex(x=>x.id===u.id), prev=DATA.units[(idx-1+DATA.units.length)%DATA.units.length], next=DATA.units[(idx+1)%DATA.units.length];
+  const flowBits=[];
+  if(u.period1)flowBits.push(detailField('1η διδακτική περίοδος',u.period1));
+  if(u.period2)flowBits.push(detailField('2η περίοδος — ολοκλήρωση',u.period2));
+  if(u.application)flowBits.push(detailField('Ιστορικός συλλογισμός / εφαρμογή',u.application));
+  const scaffolds=(u.scaffolds||[]).map(s=>`<div class="scaffold">${esc(s)}</div>`).join('');
+  view.innerHTML=`<section class="view">
+    <div class="unit-toolbar"><button class="unit-nav-btn prev" type="button" onclick="setHash('unit-${prev.id}')">← Προηγούμενη</button><select class="unit-select" id="unitSelect">${unitSelectOptions(u.id)}</select><button class="unit-nav-btn next" type="button" onclick="setHash('unit-${next.id}')">Επόμενη →</button></div>
+    <div class="unit-title-wrap"><p class="kicker">ΕΝΟΤΗΤΑ ${u.id}</p><h1>${esc(u.title)}</h1><div class="unit-badges"><span class="unit-badge">${esc(u.reasoning)}</span><span class="unit-badge">${esc(u.tool)}</span><span class="unit-badge">${esc(sourcePeriods(u.periods))}</span></div></div>
+    <figure class="map-card"><div class="map-head"><strong>Χάρτης</strong><div class="map-actions"><button class="plain-btn" id="fullscreenBtn" type="button">Πλήρης οθόνη</button></div></div><div class="fullscreen-wrap" id="fullscreenWrap"><div class="map-stage" id="mapStage"><img id="mapImg" src="${esc(u.image)}" alt="Χάρτης ενότητας ${u.id}"><div class="map-missing" id="mapMissing" hidden>Δεν βρέθηκε το αρχείο <strong>${esc(u.image)}</strong>.</div></div><figcaption class="map-footer">${esc(DATA.author)}</figcaption></div></figure>
+    <div class="content-layout">
+      <div class="accordion-stack">
+        <details open><summary>Κόμβος, ερώτημα και ιστορικός συλλογισμός</summary><div class="detail-body">${detailField('Κόμβος εστίασης',u.node)}${detailField('Κεντρικό ερώτημα',u.question)}${detailField('Ιστορικός συλλογισμός',u.reasoning)}${detailField('Εργαλείο',u.tool)}</div></details>
+        <details><summary>Βασικές έννοιες / στοιχεία και τεκμήριο</summary><div class="detail-body">${detailField('Βασικές έννοιες / στοιχεία',u.concepts)}${detailField('Προτεινόμενο τεκμήριο',u.evidence)}</div></details>
+        <details><summary>Ροή εφαρμογής</summary><div class="detail-body">${flowBits.join('')}</div></details>
+        <details><summary>Γλωσσικές σκαλωσιές και έλεγχος</summary><div class="detail-body">${scaffolds?`<div class="field"><div class="field-label">Γλωσσικές σκαλωσιές</div><div class="scaffold-list">${scaffolds}</div></div>`:''}${detailField('Επιστροφή στον Χάρτη',u.return_map)}${detailField('Δελτίο εξόδου',u.exit_ticket)}</div></details>
+      </div>
+      <aside class="side-actions"><button class="side-button" id="notesBtn" type="button">Προσωπικές σημειώσεις<span>Αποθήκευση σε αυτόν τον browser</span></button><button class="side-button" type="button" onclick="setHash('tools')">Εκτυπώσιμα πρότυπα<span>${esc(u.tool)}</span></button></aside>
+    </div>
+  </section>`;
+  document.getElementById('unitSelect').onchange=e=>setHash('unit-'+e.target.value);
+  const img=document.getElementById('mapImg'), miss=document.getElementById('mapMissing');
+  img.addEventListener('error',()=>{img.hidden=true;miss.hidden=false});
+  document.getElementById('fullscreenBtn').onclick=async()=>{const el=document.getElementById('fullscreenWrap'); if(!document.fullscreenElement) await el.requestFullscreen?.(); else await document.exitFullscreen?.()};
+  document.getElementById('notesBtn').onclick=()=>openNotes(u);
+}
+function renderTools(){
+  navActive('tools');
+  view.innerHTML=`<section class="view"><div class="page-head"><div><p class="kicker">ΥΛΙΚΟ ΑΝΑΦΟΡΑΣ</p><h1>Γενικά εκτυπώσιμα πρότυπα</h1><p>${esc(INTRO.toolsIntro)}</p></div></div><div class="tool-list">${DATA.tools.map(t=>`<button class="tool-card" onclick="setHash('tool-${t.id}')"><small>Πρότυπο ${t.id}</small><strong>${esc(t.title)}</strong></button>`).join('')}</div></section>`;
+}
+function renderTool(id){
+  navActive('tools'); const t=DATA.tools.find(x=>x.id===Number(id));if(!t){renderTools();return}
+  let body='';
+  if(t.kind==='table') body=`<div class="table-wrap"><table><thead><tr>${t.headers.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${Array.from({length:t.rows},()=>`<tr>${t.headers.map(()=>`<td contenteditable="true"></td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  else body=t.prompts.map(p=>`<div class="prompt-row"><label>${esc(p)}</label><div contenteditable="true"></div></div>`).join('');
+  view.innerHTML=`<section class="view"><div class="page-head"><div><p class="kicker">ΕΚΤΥΠΩΣΙΜΑ ΠΡΟΤΥΠΑ</p><h1>Πρότυπο ${t.id} — ${esc(t.title)}</h1><p>Επεξεργάσιμο πρότυπο</p></div><div class="page-head-actions"><button class="plain-btn" onclick="setHash('tools')">← Όλα τα πρότυπα</button></div></div><div class="tool-sheet">${body}</div></section>`;
+}
+function renderRubric(){
+  navActive('rubric'); const [head,...rows]=DATA.rubric;
+  view.innerHTML=`<section class="view"><div class="page-head"><div><p class="kicker">ΑΠΟΤΙΜΗΣΗ</p><h1>Σύντομη ρουμπρίκα ιστορικού λόγου</h1><p>${esc(INTRO.rubricSubtitle)}</p></div></div><div class="table-wrap"><table><thead><tr>${head.map(x=>`<th>${esc(x)}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(x=>`<td>${esc(x)}</td>`).join('')}</tr>`).join('')}</tbody></table></div></section>`;
+}
+function renderPrinciple(){
+  navActive('principle');
+  view.innerHTML=`<section class="view"><div class="page-head"><div><p class="kicker">ΤΕΛΙΚΗ ΑΡΧΗ</p><h1>Η τελική αρχή εφαρμογής</h1><p class="source-copy">${esc(INTRO.principleLead)}</p></div></div><div class="accordion-stack">${INTRO.principleSteps.map((s,i)=>`<div class="tool-card"><small>${i+1}</small><strong>${esc(s)}</strong></div>`).join('')}<div class="source-flow">${esc(INTRO.principleEnd)}</div></div></section>`;
+}
+function route(){
+  const raw=location.hash.replace(/^#/,'')||'home';
+  if(raw==='home')renderHome(); else if(raw==='roadmap')renderRoadmap(); else if(raw==='units')renderUnits(); else if(raw==='tools')renderTools(); else if(raw==='rubric')renderRubric(); else if(raw==='principle')renderPrinciple(); else if(raw.startsWith('unit-'))renderUnit(raw.split('-')[1]); else if(raw.startsWith('tool-'))renderTool(raw.split('-')[1]); else renderHome();
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+/* Main nav */
+document.querySelectorAll('[data-route]').forEach(b=>b.onclick=()=>setHash(b.dataset.route));
+document.getElementById('mobileMenu').onchange=e=>setHash(e.target.value);
+window.addEventListener('hashchange',route);
+
+/* Search */
+const searchDialog=document.getElementById('searchDialog'), searchInput=document.getElementById('searchInput'), searchResults=document.getElementById('searchResults');
+function openSearch(){searchDialog.hidden=false;searchInput.value='';drawSearch('');setTimeout(()=>searchInput.focus(),10)}
+function closeSearch(){searchDialog.hidden=true}
+function searchable(u){return [u.id,u.title,u.node,u.reasoning,u.tool,u.question,u.concepts,u.evidence,u.period1,u.period2,u.application,...(u.scaffolds||[]),u.return_map,u.exit_ticket].join(' ').toLocaleLowerCase('el')}
+function drawSearch(q){q=q.trim().toLocaleLowerCase('el'); if(!q){searchResults.innerHTML='<div class="empty">Γράψτε λέξη ή φράση.</div>';return} const hits=DATA.units.filter(u=>searchable(u).includes(q));searchResults.innerHTML=hits.length?hits.map(u=>`<button class="search-result" data-id="${u.id}"><strong>Ενότητα ${u.id} — ${esc(u.title)}</strong><small>${esc(u.reasoning)} · ${esc(u.tool)}</small></button>`).join(''):'<div class="empty">Δεν βρέθηκαν αποτελέσματα.</div>';searchResults.querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>{closeSearch();setHash('unit-'+b.dataset.id)})}
+document.getElementById('searchBtn').onclick=openSearch;document.getElementById('closeSearch').onclick=closeSearch;searchInput.oninput=e=>drawSearch(e.target.value);searchDialog.addEventListener('click',e=>{if(e.target===searchDialog)closeSearch()});
+
+/* Notes */
+const drawer=document.getElementById('notesDrawer'), backdrop=document.getElementById('drawerBackdrop'), notesArea=document.getElementById('notesArea'); let noteUnit=null;
+function noteKey(id){return 'history-reference-notes-unit-'+id}
+function openNotes(u){noteUnit=u;document.getElementById('notesUnitLabel').textContent=`Ενότητα ${u.id} — ${u.title}`;notesArea.value=localStorage.getItem(noteKey(u.id))||'';drawer.classList.add('open');backdrop.classList.add('open');drawer.setAttribute('aria-hidden','false');setTimeout(()=>notesArea.focus(),120)}
+function closeNotes(){drawer.classList.remove('open');backdrop.classList.remove('open');drawer.setAttribute('aria-hidden','true')}
+notesArea.addEventListener('input',()=>{if(noteUnit)localStorage.setItem(noteKey(noteUnit.id),notesArea.value)});
+document.getElementById('closeNotes').onclick=closeNotes;backdrop.onclick=closeNotes;
+document.getElementById('clearNotes').onclick=()=>{if(!noteUnit)return;if(confirm('Να διαγραφούν οι προσωπικές σημειώσεις αυτής της ενότητας;')){notesArea.value='';localStorage.removeItem(noteKey(noteUnit.id))}};
+document.getElementById('printNotes').onclick=()=>{if(!noteUnit)return;document.getElementById('printUnitTitle').textContent=`Ενότητα ${noteUnit.id} — ${noteUnit.title}`;document.getElementById('printNotesText').textContent=notesArea.value||'';document.body.classList.add('printing-notes');window.print();setTimeout(()=>document.body.classList.remove('printing-notes'),300)};
+window.addEventListener('afterprint',()=>document.body.classList.remove('printing-notes'));
+
+/* Keyboard */
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!searchDialog.hidden)closeSearch();if(drawer.classList.contains('open'))closeNotes();return} const tag=document.activeElement?.tagName;if(['INPUT','TEXTAREA','SELECT'].includes(tag)||document.activeElement?.isContentEditable)return; const raw=location.hash.replace(/^#/,'');if(raw.startsWith('unit-')&&(e.key==='ArrowLeft'||e.key==='ArrowRight')){const id=Number(raw.split('-')[1]),idx=DATA.units.findIndex(u=>u.id===id);if(idx>=0){const n=e.key==='ArrowRight'?DATA.units[(idx+1)%DATA.units.length]:DATA.units[(idx-1+DATA.units.length)%DATA.units.length];setHash('unit-'+n.id)}}});
+route();
+</script>
+</body>
+</html>
